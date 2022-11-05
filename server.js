@@ -3,7 +3,7 @@ require('dotenv').config();
 const Enum  ={
     addition :"addition",
     subtraction :"subtraction",
-    multiplication :"multiplication",
+    multiplication :"multiplication"
 };
 
 
