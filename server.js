@@ -3,7 +3,7 @@ require('dotenv').config();
 const Enum  ={
     addition :"addition",
     subtraction :"subtraction",
-    multiplication :"multiplication"
+    multiplication : "multiplication"
 };
 
 
@@ -40,7 +40,7 @@ const server = http.createServer((req,res)=>{
                     var result = x-y;
                     runResponds(result,"subtraction",res);
                 }
-                else if (Enum.multiplication == operation_type || operation_type.toLowerCase().includes("times") || operation_type.toLowerCase().includes("multiply") )
+                else if (Enum.multiplication == operation_type || operation_type.toLowerCase().includes("times") || operation_type.toLowerCase().includes("multiply") || operation_type.toLowerCase().includes("multiplication") )
                 {
                     var result = x*y;
                     runResponds(result,"multiplication",res);
