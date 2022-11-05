@@ -15,7 +15,7 @@ const server = http.createServer((req,res)=>{
             'bio': 'Building technological solutions'
          }));
     }
-    else if(req.url === '/api/calculate' && req.method === 'POST')
+    else if(req.url === '/calculate' && req.method === 'POST')
     {
 
         let body ='';
@@ -23,7 +23,7 @@ const server = http.createServer((req,res)=>{
             body +=chuck.toString();
         });
         req.on('end', ()=>{
-            
+
            const {operation_type,x,y} = JSON.parse(body);
             // check if x and y data are integer datatype
             if( Number.isInteger(x) == true &&  Number.isInteger(y) == true){
@@ -60,10 +60,6 @@ const server = http.createServer((req,res)=>{
             }
         });
 
-    }
-    else{
-        res.writeHead(200, {'Content-Type':'application/json'});  
-        res.end(JSON.stringify({'message':'I can only respond to GET request for now'}));  
     }
 
 });
