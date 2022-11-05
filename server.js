@@ -1,6 +1,10 @@
 const http = require('http');
 require('dotenv').config(); 
-
+const Enum  ={
+    addition :"addition",
+    subtraction :"subtraction",
+    multiplication :"multiplication",
+};
 
 
 const server = http.createServer((req,res)=>{
@@ -23,21 +27,20 @@ const server = http.createServer((req,res)=>{
             body +=chuck.toString();
         });
         req.on('end', ()=>{
-
            const {operation_type,x,y} = JSON.parse(body);
-            // check if x and y data are integer datatype
+
             if( Number.isInteger(x) == true &&  Number.isInteger(y) == true){
-                if("addition" == operation_type.toLowerCase() || operation_type.toLowerCase().includes("add") || operation_type.toLowerCase().includes("sum") )
+                if(Enum.addition == operation_type || operation_type.toLowerCase().includes("add") || operation_type.toLowerCase().includes("sum") )
                 {
                     var result = x+y;
-                    runResponds(result,"addition",res);
+                        runResponds(result,"addition",res);
                 }
-                else if ("subtraction" == operation_type.toLowerCase() || operation_type.toLowerCase().includes("minus") || operation_type.toLowerCase().includes("difference") || operation_type.toLowerCase().includes("subtract") )
+                else if (Enum.subtraction == operation_type || operation_type.toLowerCase().includes("minus") || operation_type.toLowerCase().includes("difference") || operation_type.toLowerCase().includes("subtract") )
                 {
                     var result = x-y;
                     runResponds(result,"subtraction",res);
                 }
-                else if ("multiplication" == operation_type.toLowerCase() || operation_type.toLowerCase().includes("times") || operation_type.toLowerCase().includes("multiply") )
+                else if (Enum.multiplication == operation_type || operation_type.toLowerCase().includes("times") || operation_type.toLowerCase().includes("multiply") )
                 {
                     var result = x*y;
                     runResponds(result,"multiplication",res);
@@ -61,6 +64,10 @@ const server = http.createServer((req,res)=>{
         });
 
     }
+    else{
+        res.writeHead(200, {'Content-Type':'application/json'});  
+        res.end(JSON.stringify({'message':'I can only respond to GET request for now'}));  
+    }
 
 });
 
@@ -78,4 +85,3 @@ function runResponds(result,operation,res)
             "operation_type": operation
         }));
 }
-
